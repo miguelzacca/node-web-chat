@@ -1,10 +1,16 @@
 const sendMessage = () => {
+  const time = new Date();
+
   const data = {
     sender: username,
     content: input.value,
+    timestamp: `${time.getHours().toString().padStart(2, "0")}:${time
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")}`,
   };
 
-  console.log(JSON.stringify(data));
+  console.log(data);
 
   fetch("http://192.168.1.7:8000/send", {
     method: "POST",
@@ -40,7 +46,7 @@ const receiveMessages = async () => {
         <p class="text">${msg.content}</p>
         <div>
           ${sender}
-          <p class="subtext">${msg.timestamp.split("T")[1].split(".")[0]}</p>
+          <p class="subtext">${msg.timestamp}</p>
         </div>
       </div>
     `;

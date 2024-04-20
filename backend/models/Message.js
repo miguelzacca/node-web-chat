@@ -11,6 +11,10 @@ const messageSchema = new mongoose.Schema({
     maxlength: 255,
   },
   timestamp: {
+    type: String,
+    required: true,
+  },
+  sortime: {
     type: Date,
     default: Date.now,
   },

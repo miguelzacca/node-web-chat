@@ -14,8 +14,7 @@ app.use(cors());
 
 app.get("/messages", (req, res) => {
   Message.find()
-    .sort({ timestamp: -1 })
-    .limit(10)
+    .sort({ sortime: -1 })
     .then((messages) => {
       res.status(200).json({ messages });
     })
@@ -30,6 +29,7 @@ app.get("/messages", (req, res) => {
 const messageDataSchema = z.object({
   sender: z.string().min(3).max(20),
   content: z.string().min(1).max(255),
+  timestamp: z.string(),
 });
 
 const validateData = (data) => {
@@ -40,17 +40,28 @@ const validateData = (data) => {
   }
 };
 
+const clearDB = async () => {
+  const totalMessages = await Message.countDocuments();
+
+  if (totalMessages > 10) {
+    const messagesToDelete = totalMessages - 10;
+    await Message.deleteMany({}, { sort: { timestamp: 1 }, limit: messagesToDelete });
+  }
+}
+
 app.post("/send", async (req, res) => {
   try {
-    const { sender, content } = validateData(req.body);
+    const { sender, content, timestamp } = validateData(req.body);
 
     const message = new Message({
       sender,
       content,
+      timestamp,
     });
 
     await message.save();
     res.status(201).json({ msg: "Sent with success." });
+    clearDB();
   } catch (err) {
     if (err[0]) {
       return res.status(400).json({ msg: err[0] });
