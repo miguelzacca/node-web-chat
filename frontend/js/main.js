@@ -6,7 +6,9 @@ const viewMyMessage = () => {
     return null;
   }
   input.value = null;
-  receiveMessages();
+  setTimeout(() => {
+    receiveMessages();
+  }, 1000);
 };
 
 window.addEventListener("keydown", (e) => {

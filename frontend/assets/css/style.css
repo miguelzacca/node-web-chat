@@ -31,6 +31,7 @@ html {
 
 html {
   font-size: 10px;
+  overflow: hidden;
 }
 
 a {
@@ -162,7 +163,7 @@ main .card {
   max-width: 50%;
   padding: 1.5rem;
   background-color: var(--identity-color);
-  border-radius: 0 1rem 1rem 1rem;
+  border-radius: 0 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -170,8 +171,7 @@ main .card {
 main .card div {
   display: flex;
   width: 100%;
-  gap: 1rem;
-  justify-content: space-between;
+  align-items: center;
 }
 
 main .card .text {
@@ -182,4 +182,20 @@ main .card .text {
 main .card .subtext {
   font-size: 1.2rem;
   color: #ccc;
+}
+
+main .card div .subtext:first-child {
+  display: flex;
+  align-items: center;
+}
+
+main .card div .subtext:first-child::after {
+  content: "";
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem !important;
+  transform: translateY(-20%);
+  border-radius: 50%;
+  margin-inline: 0.5rem;
+  background-color: #ccccccaa;
 }

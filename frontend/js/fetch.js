@@ -6,7 +6,7 @@ const sendMessage = () => {
 
   console.log(JSON.stringify(data));
 
-  fetch("http://127.0.0.1:8000/send", {
+  fetch("http://192.168.1.7:8000/send", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -18,7 +18,7 @@ const sendMessage = () => {
 };
 
 const receiveMessages = async () => {
-  const data = await fetch("http://127.0.0.1:8000/messages")
+  const data = await fetch("http://192.168.1.7:8000/messages")
     .then((res) => {
       return res.json();
     })
@@ -27,11 +27,19 @@ const receiveMessages = async () => {
   const messages = [];
 
   for (const msg of data.messages) {
+    const toLower = (word) => word.toLowerCase().trim();
+
+    let sender = `<p class="subtext">${toLower(msg.sender)}</p>`;
+
+    if (toLower(msg.sender) === toLower(localStorage.getItem("username"))) {
+      sender = `<p class="subtext">you</p>`;
+    }
+
     const component = `
       <div class="card">
         <p class="text">${msg.content}</p>
         <div>
-          <p class="subtext">${msg.sender}</p>
+          ${sender}
           <p class="subtext">${msg.timestamp.split("T")[1].split(".")[0]}</p>
         </div>
       </div>
