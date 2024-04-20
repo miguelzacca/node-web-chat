@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+  font-family: "Poppins";
+}
+
+:root {
+  --black: #200020;
+  --white: #eee;
+  --header-height: 7rem;
+  --identity-color: #c41fb6;
+  --gray: #444;
+  --page-limit: 1200px;
+}
+
+body {
+  background-color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2.5rem;
+}
+
+body,
+html {
+  height: 100vh;
+}
+
+html {
+  font-size: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+a,
+h1,
+button {
+  transition: all 0.2s;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  position: absolute;
+  inset-block-start: 0;
+  width: 100%;
+  height: var(--header-height);
+  background-color: var(--black);
+}
+
+header,
+footer {
+  padding: 0 5rem;
+  width: calc(100% - 5rem * 2);
+}
+
+header nav {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--page-limit);
+}
+
+header h1 {
+  font-size: 2.2rem;
+  color: var(--identity-color);
+  cursor: default;
+}
+
+header h1:hover {
+  filter: drop-shadow(0 0 10px #f17ae899);
+}
+
+header a:last-child {
+  font-size: 1.7rem;
+  color: var(--white);
+  padding: 0.4rem 1.5rem;
+  border: 0.2rem solid var(--white);
+  border-radius: 2.5rem;
+}
+
+header a:hover,
+footer .container div button:hover {
+  color: #ee51e1;
+  border-color: #ee51e1;
+}
+
+footer {
+  position: absolute;
+  inset-block-end: 0;
+  height: var(--header-height);
+  background-color: var(--black);
+}
+
+footer .container {
+  width: 100%;
+  max-width: var(--page-limit);
+}
+
+footer .container div {
+  width: 100%;
+  gap: 1rem;
+}
+
+footer .container div input[required] {
+  width: calc(100% - 7rem);
+  height: 100%;
+  font-size: 1.7rem;
+  color: var(--white);
+  border: 0;
+  padding: 0.5rem 1rem;
+  outline: none;
+  border-bottom: 0.2rem solid var(--white);
+  background-color: transparent;
+}
+
+footer .container div input[required]::placeholder {
+  color: #ccc;
+}
+
+footer .container div button {
+  width: 6rem;
+  font-size: 2.2rem;
+  cursor: pointer;
+  color: var(--white);
+  background-color: transparent;
+  border: 0.2rem solid var(--white);
+  border-radius: 2.5rem;
+}
+
+main {
+  border-top: var(--header-height);
+  padding: 2rem 0;
+  height: calc(100% - (var(--header-height) * 2 + 4rem));
+  width: 100%;
+  max-width: var(--page-limit);
+  overflow-y: scroll;
+  flex-direction: column-reverse;
+  justify-content: end;
+  align-items: start;
+  gap: 2rem;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+main .card {
+  max-width: 50%;
+  padding: 1.5rem;
+  background-color: var(--identity-color);
+  border-radius: 0 1rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+main .card div {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+main .card .text {
+  font-size: 1.7rem;
+  color: var(--white);
+}
+
+main .card .subtext {
+  font-size: 1.2rem;
+  color: #ccc;
+}
