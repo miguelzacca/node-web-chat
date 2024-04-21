@@ -10,7 +10,7 @@ const sendMessage = () => {
       .padStart(2, "0")}`,
   };
 
-  fetch("https://c374-201-131-138-29.ngrok-free.app/send", {
+  fetch("http://192.168.1.7:8000/send", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,14 +23,11 @@ const sendMessage = () => {
 };
 
 const receiveMessages = async () => {
-  const data = await fetch(
-    "https://c374-201-131-138-29.ngrok-free.app/messages",
-    {
-      headers: {
-        "ngrok-skip-browser-warning": true,
-      },
-    }
-  )
+  const data = await fetch("http://192.168.1.7:8000/messages", {
+    headers: {
+      "ngrok-skip-browser-warning": true,
+    },
+  })
     .then((res) => {
       return res.json();
     })
@@ -41,19 +38,19 @@ const receiveMessages = async () => {
   for (const msg of data.messages) {
     const toLower = (word) => word.toLowerCase().trim();
 
-    let sender = `<p class="subtext">${toLower(msg.sender)}</p>`;
+    let sender = `<p class="subtext name flex">${toLower(msg.sender)}</p>`;
     let you = "";
 
     if (toLower(msg.sender) === toLower(localStorage.getItem("username"))) {
-      sender = `<p class="subtext">you</p>`;
+      sender = ``;
       you = `id="you"`;
     }
 
     const component = `
-      <div class="card" ${you}>
+      <div class="card flex col" ${you}>
+        <div>${sender}</div>
         <p class="text">${msg.content}</p>
-        <div>
-          ${sender}
+        <div class="flex">
           <p class="subtext">${msg.timestamp}</p>
         </div>
       </div>

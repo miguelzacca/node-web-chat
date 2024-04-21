@@ -43,8 +43,8 @@ const validateData = (data) => {
 const clearDB = async () => {
   const totalMessages = await Message.countDocuments();
 
-  if (totalMessages > 10) {
-    const messagesToDelete = totalMessages - 10;
+  if (totalMessages > 20) {
+    const messagesToDelete = totalMessages - 20;
     await Message.deleteMany(
       {},
       { sort: { timestamp: 1 }, limit: messagesToDelete }

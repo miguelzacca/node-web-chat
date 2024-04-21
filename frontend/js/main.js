@@ -23,7 +23,7 @@ document.querySelector("footer button").addEventListener("click", () => {
   viewMyMessage();
 });
 
-document.querySelector("header h1").addEventListener("click", () => {
+document.querySelector("header .profile").addEventListener("click", () => {
   localStorage.clear();
   location.reload();
 });

@@ -8,16 +8,25 @@
 }
 
 :root {
-  --black: #200020;
-  --white: #eee;
+  --black: #444;
+  --white: #ddd;
   --header-height: 7rem;
-  --identity-color: #c41fb6;
+  --identity-color: #ddd;
   --gray: #444;
   --page-limit: 1200px;
+  --black-border: 0.05rem solid #555;
 }
 
 body {
   background-color: var(--white);
+  display: grid;
+  place-items: center;
+  grid-template-columns: 30rem auto;
+  grid-template-rows: var(--header-height) auto var(--header-height);
+  grid-template-areas:
+    "aside header"
+    "aside main"
+    "aside footer";
 }
 
 body,
@@ -49,19 +58,44 @@ button {
   align-items: center;
 }
 
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  background-color: var(--black);
+.col {
+  flex-direction: column;
 }
 
-header,
-footer {
-  padding: 0 5rem;
-  width: calc(100% - 5rem * 2);
+header {
+  background-color: var(--black);
+  grid-area: header;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  border-bottom: var(--black-border);
+}
+
+header .profile {
+  gap: 1.5rem;
+  cursor: pointer;
+}
+
+header .profile img {
+  width: 4.5rem;
+  aspect-ratio: 1;
+  filter: brightness(0.6) contrast(3);
+}
+
+header .profile div {
+  justify-content: center;
+  transform: translateY(-0.15rem);
+}
+
+header .profile p {
+  font-size: 1.3rem;
+  margin-top: -0.3rem;
+  color: #aaa;
+}
+
+header nav,
+footer .container {
+  margin: 0 5rem;
 }
 
 header nav {
@@ -72,9 +106,9 @@ header nav {
 }
 
 header h1 {
-  font-size: 2.2rem;
-  color: var(--identity-color);
-  cursor: pointer;
+  font-size: 1.8rem;
+  color: #eee;
+  font-weight: 400;
 }
 
 header a:last-child {
@@ -86,16 +120,17 @@ header a:last-child {
 }
 
 header a:hover {
-  color: #ee51e1;
-  border-color: #ee51e1;
+  color: #06cf9c;
+  border-color: #06cf9c;
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  height: var(--header-height);
   background-color: var(--black);
+  grid-area: footer;
+  width: 100%;
+  height: 100%;
+  border-top: var(--black-border);
+  z-index: 99;
 }
 
 footer .container {
@@ -108,20 +143,25 @@ footer .container div {
   gap: 1rem;
 }
 
+.space {
+  margin-block: 1rem;
+}
+
 footer .container div input[required] {
   width: calc(100% - 7rem);
   height: 100%;
-  font-size: 1.7rem;
+  background-color: #555;
+  font-size: 1.5rem;
+  border-radius: 1rem;
   color: var(--white);
   border: 0;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
   outline: none;
-  border-bottom: 0.2rem solid var(--white);
-  background-color: transparent;
 }
 
 footer .container div input[required]::placeholder {
-  color: #ccc;
+  color: #bbb;
+  padding-left: 0.5rem;
 }
 
 footer .container div button {
@@ -134,11 +174,8 @@ footer .container div button {
   height: 4.2rem;
   filter: brightness(0.9);
   transform: translateX(0);
+  outline: none;
   transition: transform 0.05s ease-in-out;
-}
-
-footer .container div button:hover {
-  filter: drop-shadow(0 0 10px var(--identity-color));
 }
 
 footer .container div button:active {
@@ -149,8 +186,10 @@ footer .container div button:focus {
   transition: transform 0.5s ease-in-out;
 }
 
-footer .container div button span {
-  font-size: 4rem;
+footer .container div button img {
+  width: 2.5rem;
+  filter: invert(0.8);
+  aspect-ratio: 1;
   color: var(--white);
   margin-block: -0.2rem;
   position: absolute;
@@ -159,19 +198,25 @@ footer .container div button span {
   transform: translate(-40%, -45%);
 }
 
+#main-bg {
+  position: absolute;
+  z-index: -3;
+  top: var(--header-height);
+  right: 0;
+  width: calc(100% - 30rem);
+  height: calc(100%);
+}
+
 main {
-  height: calc(100% - var(--header-height) * 2);
-  width: calc(100% - 5rem);
   max-width: 944px;
   overflow-y: scroll;
   flex-direction: column-reverse;
   justify-content: end;
   align-items: start;
-  gap: 2rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  gap: .75rem;
+  grid-area: main;
+  width: calc(100% - 5rem);
+  height: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -180,11 +225,16 @@ main {
 
 main .card {
   max-width: 50%;
-  padding: 1.5rem;
-  background-color: var(--identity-color);
-  border-radius: 0 2rem 2rem 2rem;
-  display: flex;
-  flex-direction: column;
+  padding: 0.5rem 1.5rem;
+  background-color: var(--black);
+  border-radius: 0 1rem 1rem 1rem;
+}
+
+main #you {
+  margin-left: auto;
+  border-radius: 1rem 0rem 1rem 1rem;
+  background-color: #005c4b;
+  padding-top: 1rem;
 }
 
 main .card:first-child {
@@ -196,38 +246,80 @@ main .card:last-child {
 }
 
 main .card div {
-  display: flex;
   width: 100%;
   align-items: center;
+  justify-content: end;
 }
 
 main .card .text {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: var(--white);
+  margin-block: -0.5rem;
+  padding-right: 2.7rem;
+  overflow: hidden;
+}
+
+main #you .text {
+  color: #eee;
 }
 
 main .card .subtext {
-  font-size: 1.2rem;
-  color: #ccc;
+  font-size: 1rem;
+  color: #bbb;
+}
+
+main .card .name {
+  color: #06cf9c;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
 }
 
 main .card div .subtext:first-child {
-  display: flex;
   align-items: center;
 }
 
-main .card div .subtext:first-child::after {
-  content: "";
-  display: block;
-  width: 0.5rem;
-  height: 0.5rem !important;
-  transform: translateY(-20%);
-  border-radius: 50%;
-  margin-inline: 0.5rem;
-  background-color: #ccccccaa;
+aside {
+  grid-area: aside;
+  width: calc(100% - 0.05rem);
+  height: 100%;
+  background-color: var(--black);
+  border-right: var(--black-border);
 }
 
-main #you {
-  margin-left: auto;
-  border-radius: 2rem 2rem 0rem 2rem;
+@media screen and (max-width: 850px) {
+  aside {
+    display: none;
+  }
+
+  #main-bg {
+    width: 100%;
+    height: 100%;
+  }
+
+  main {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: calc(100% - var(--header-height) * 2);
+  }
+
+  header,
+  footer {
+    position: absolute;
+    height: var(--header-height);
+    left: 0;
+  }
+
+  header {
+    top: 0;
+  }
+
+  footer {
+    bottom: 0;
+  }
+
+  main .card {
+    max-width: 70%;
+  }
 }
