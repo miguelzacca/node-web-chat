@@ -2,6 +2,22 @@
 
 Nodejs web chat with MongoDB Cloud (AWS) and Express.
 
+## Database
+
+To use the database, create an account with MongoDB Atlas.
+
+- Create and configure your free Cluster.
+
+- Get the connection string, your username and password.
+
+- Configure your `.env` file in the root of the backend directory, follow the template
+
+```
+PORT=8000
+DB_USER=<username>
+DB_PASS=<password>
+```
+
 ## Installation (backend)
 
 To install dependencies, use
