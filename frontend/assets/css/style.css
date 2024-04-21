@@ -18,10 +18,6 @@
 
 body {
   background-color: var(--white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 2.5rem;
 }
 
 body,
@@ -89,8 +85,7 @@ header a:last-child {
   border-radius: 2.5rem;
 }
 
-header a:hover,
-footer .container div button:hover {
+header a:hover {
   color: #ee51e1;
   border-color: #ee51e1;
 }
@@ -131,23 +126,52 @@ footer .container div input[required]::placeholder {
 
 footer .container div button {
   width: 6rem;
-  font-size: 2.2rem;
   cursor: pointer;
-  color: var(--white);
   background-color: transparent;
-  border: 0.2rem solid var(--white);
+  border: 0;
   border-radius: 2.5rem;
+  position: relative;
+  height: 4.2rem;
+  filter: brightness(0.9);
+  transform: translateX(0);
+  transition: transform 0.05s ease-in-out;
+}
+
+footer .container div button:hover {
+  filter: drop-shadow(0 0 10px var(--identity-color));
+}
+
+footer .container div button:active {
+  transform: translateX(2.5rem);
+}
+
+footer .container div button:focus {
+  transition: transform 0.5s ease-in-out;
+}
+
+footer .container div button span {
+  font-size: 4rem;
+  color: var(--white);
+  margin-block: -0.2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-40%, -45%);
 }
 
 main {
-  height: calc((100% - var(--header-height) * 2) - 2rem);
-  width: 100%;
+  height: calc(100% - var(--header-height) * 2);
+  width: calc(100% - 5rem);
   max-width: 944px;
   overflow-y: scroll;
   flex-direction: column-reverse;
   justify-content: end;
   align-items: start;
   gap: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 ::-webkit-scrollbar {
@@ -161,6 +185,14 @@ main .card {
   border-radius: 0 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
+}
+
+main .card:first-child {
+  margin-bottom: 2rem;
+}
+
+main .card:last-child {
+  margin-top: 2rem;
 }
 
 main .card div {
@@ -198,11 +230,4 @@ main .card div .subtext:first-child::after {
 main #you {
   margin-left: auto;
   border-radius: 2rem 2rem 0rem 2rem;
-}
-
-@media screen and (max-width: 750px) {
-  main {
-    margin-bottom: calc(var(--header-height) - 1rem);
-    height: calc((100% - var(--header-height) * 2) - 8rem);
-  }
 }
