@@ -40,7 +40,6 @@ a {
 }
 
 a,
-h1,
 button {
   transition: all 0.2s;
 }
@@ -55,8 +54,9 @@ button {
 }
 
 header {
-  position: absolute;
-  inset-block-start: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: var(--header-height);
   background-color: var(--black);
@@ -78,11 +78,7 @@ header nav {
 header h1 {
   font-size: 2.2rem;
   color: var(--identity-color);
-  cursor: default;
-}
-
-header h1:hover {
-  filter: drop-shadow(0 0 10px #f17ae899);
+  cursor: pointer;
 }
 
 header a:last-child {
@@ -100,8 +96,9 @@ footer .container div button:hover {
 }
 
 footer {
-  position: absolute;
-  inset-block-end: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   height: var(--header-height);
   background-color: var(--black);
 }
@@ -143,11 +140,9 @@ footer .container div button {
 }
 
 main {
-  border-top: var(--header-height);
-  padding: 2rem 0;
-  height: calc(100% - (var(--header-height) * 2 + 4rem));
+  height: calc((100% - var(--header-height) * 2) - 2rem);
   width: 100%;
-  max-width: var(--page-limit);
+  max-width: 944px;
   overflow-y: scroll;
   flex-direction: column-reverse;
   justify-content: end;
@@ -198,4 +193,16 @@ main .card div .subtext:first-child::after {
   border-radius: 50%;
   margin-inline: 0.5rem;
   background-color: #ccccccaa;
+}
+
+main #you {
+  margin-left: auto;
+  border-radius: 2rem 2rem 0rem 2rem;
+}
+
+@media screen and (max-width: 750px) {
+  main {
+    margin-bottom: calc(var(--header-height) - 1rem);
+    height: calc((100% - var(--header-height) * 2) - 8rem);
+  }
 }

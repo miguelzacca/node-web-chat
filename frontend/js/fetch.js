@@ -10,8 +10,6 @@ const sendMessage = () => {
       .padStart(2, "0")}`,
   };
 
-  console.log(data);
-
   fetch("http://192.168.1.7:8000/send", {
     method: "POST",
     headers: {
@@ -36,13 +34,15 @@ const receiveMessages = async () => {
     const toLower = (word) => word.toLowerCase().trim();
 
     let sender = `<p class="subtext">${toLower(msg.sender)}</p>`;
+    let you = "";
 
     if (toLower(msg.sender) === toLower(localStorage.getItem("username"))) {
       sender = `<p class="subtext">you</p>`;
+      you = `id="you"`;
     }
 
     const component = `
-      <div class="card">
+      <div class="card" ${you}>
         <p class="text">${msg.content}</p>
         <div>
           ${sender}
@@ -57,3 +57,4 @@ const receiveMessages = async () => {
 };
 
 receiveMessages();
+setInterval(receiveMessages, 5000);

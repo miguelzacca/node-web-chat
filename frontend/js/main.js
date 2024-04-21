@@ -23,6 +23,11 @@ document.querySelector("footer button").addEventListener("click", () => {
   viewMyMessage();
 });
 
+document.querySelector("header h1").addEventListener("click", () => {
+  localStorage.clear();
+  location.reload();
+});
+
 while (!username) {
   username = prompt("Enter your username:");
   if (username && (username.length < 3 || username.length > 20)) {
@@ -30,4 +35,5 @@ while (!username) {
   }
 }
 
+document.querySelector("header h1").textContent = username;
 localStorage.setItem("username", username);

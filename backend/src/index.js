@@ -45,9 +45,12 @@ const clearDB = async () => {
 
   if (totalMessages > 10) {
     const messagesToDelete = totalMessages - 10;
-    await Message.deleteMany({}, { sort: { timestamp: 1 }, limit: messagesToDelete });
+    await Message.deleteMany(
+      {},
+      { sort: { timestamp: 1 }, limit: messagesToDelete }
+    );
   }
-}
+};
 
 app.post("/send", async (req, res) => {
   try {
