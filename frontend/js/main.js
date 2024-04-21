@@ -29,7 +29,7 @@ document.querySelector("header .profile").addEventListener("click", () => {
 });
 
 while (!username) {
-  username = prompt("Enter your username:");
+  username = prompt("USERNAME:");
   if (username && (username.length < 3 || username.length > 20)) {
     username = "";
   }

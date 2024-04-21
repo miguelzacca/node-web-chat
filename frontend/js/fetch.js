@@ -22,6 +22,8 @@ const sendMessage = () => {
     .catch((err) => console.error(err));
 };
 
+let lastSender = "";
+
 const receiveMessages = async () => {
   const data = await fetch("http://192.168.1.7:8000/messages", {
     headers: {
@@ -38,17 +40,22 @@ const receiveMessages = async () => {
   for (const msg of data.messages) {
     const toLower = (word) => word.toLowerCase().trim();
 
-    let sender = `<p class="subtext name flex">${toLower(msg.sender)}</p>`;
+    msg.sender = toLower(msg.sender);
+
+    let sender = `<p class="subtext name flex">${msg.sender}</p>`;
     let you = "";
 
-    if (toLower(msg.sender) === toLower(localStorage.getItem("username"))) {
+    if (msg.sender === toLower(localStorage.getItem("username"))) {
       sender = ``;
       you = `id="you"`;
     }
 
+    let space = lastSender !== msg.sender ? `<br>` : "";
+
     const component = `
+      ${space}
       <div class="card flex col" ${you}>
-        <div>${sender}</div>
+        ${sender}
         <p class="text">${msg.content}</p>
         <div class="flex">
           <p class="subtext">${msg.timestamp}</p>
@@ -56,6 +63,8 @@ const receiveMessages = async () => {
       </div>
     `;
     messages.push(component);
+
+    lastSender = msg.sender;
   }
 
   document.querySelector("main").innerHTML = messages.join("");

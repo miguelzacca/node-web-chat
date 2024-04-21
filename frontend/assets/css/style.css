@@ -31,11 +31,11 @@ body {
 
 body,
 html {
+  font-size: 10px;
   height: 100vh;
 }
 
 html {
-  font-size: 10px;
   overflow: hidden;
 }
 
@@ -71,23 +71,23 @@ header {
   border-bottom: var(--black-border);
 }
 
-header .profile {
+.profile {
   gap: 1.5rem;
   cursor: pointer;
 }
 
-header .profile img {
+.profile img {
   width: 4.5rem;
   aspect-ratio: 1;
   filter: brightness(0.6) contrast(3);
 }
 
-header .profile div {
+.profile div {
   justify-content: center;
   transform: translateY(-0.15rem);
 }
 
-header .profile p {
+.profile p {
   font-size: 1.3rem;
   margin-top: -0.3rem;
   color: #aaa;
@@ -105,10 +105,64 @@ header nav {
   max-width: var(--page-limit);
 }
 
-header h1 {
+header h1,
+aside h1 {
   font-size: 1.8rem;
   color: #eee;
   font-weight: 400;
+}
+
+aside .header {
+  grid-area: aside-header;
+  width: 100%;
+  height: var(--header-height);
+  border-bottom: var(--black-border);
+  background-color: var(--black);
+  filter: blur(2.5px);
+}
+
+aside #under-c {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20rem;
+  z-index: 3;
+  filter: grayscale(1);
+}
+
+aside .container {
+  grid-area: aside-container;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding: 1rem 0;
+  filter: blur(2.5px);
+}
+
+aside .profile {
+  padding: 1rem 0;
+  padding-left: 2rem;
+  justify-content: start;
+}
+
+aside .profile:hover {
+  background-image: radial-gradient(#06cf9c20, transparent);
+}
+
+aside {
+  position: relative;
+  grid-area: aside;
+  width: calc(100% - 0.05rem);
+  height: 100%;
+  background-color: #333;
+  border-right: var(--black-border);
+  display: grid;
+  grid-template-rows: var(--header-height) auto;
+  grid-template-areas:
+    "aside-header"
+    "aside-container";
+  filter: brightness(0.5);
 }
 
 header a:last-child {
@@ -213,7 +267,7 @@ main {
   flex-direction: column-reverse;
   justify-content: end;
   align-items: start;
-  gap: .75rem;
+  gap: 0.5rem;
   grid-area: main;
   width: calc(100% - 5rem);
   height: 100%;
@@ -224,7 +278,7 @@ main {
 }
 
 main .card {
-  max-width: 50%;
+  max-width: 45%;
   padding: 0.5rem 1.5rem;
   background-color: var(--black);
   border-radius: 0 1rem 1rem 1rem;
@@ -278,21 +332,13 @@ main .card div .subtext:first-child {
   align-items: center;
 }
 
-aside {
-  grid-area: aside;
-  width: calc(100% - 0.05rem);
-  height: 100%;
-  background-color: var(--black);
-  border-right: var(--black-border);
-}
-
 @media screen and (max-width: 850px) {
   aside {
     display: none;
   }
 
   #main-bg {
-    width: 100%;
+    width: 200%;
     height: 100%;
   }
 
