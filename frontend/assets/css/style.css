@@ -368,4 +368,9 @@ main .card div .subtext:first-child {
   main .card {
     max-width: 70%;
   }
+
+  header nav,
+  footer .container {
+    margin: 0 2.5rem;
+  }
 }

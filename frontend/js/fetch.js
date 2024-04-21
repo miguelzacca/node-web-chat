@@ -10,7 +10,7 @@ const sendMessage = () => {
       .padStart(2, "0")}`,
   };
 
-  fetch("http://192.168.1.7:8000/send", {
+  fetch("https://epic-tarpon-definitely.ngrok-free.app/send", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,11 +25,14 @@ const sendMessage = () => {
 let lastSender = "";
 
 const receiveMessages = async () => {
-  const data = await fetch("http://192.168.1.7:8000/messages", {
-    headers: {
-      "ngrok-skip-browser-warning": true,
-    },
-  })
+  const data = await fetch(
+    "https://epic-tarpon-definitely.ngrok-free.app/messages",
+    {
+      headers: {
+        "ngrok-skip-browser-warning": true,
+      },
+    }
+  )
     .then((res) => {
       return res.json();
     })
